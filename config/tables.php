@@ -9,7 +9,6 @@ $recipesStatement->execute();
 
 $recipes = $recipesStatement->fetchAll();
 
-
 // On récupère tout le contenu de la table users
 $sqlQuery = 'SELECT * FROM users';
 $usersStatement = $db->prepare($sqlQuery);

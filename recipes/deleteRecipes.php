@@ -38,13 +38,13 @@ $deleteRecipeStatement->execute([
     <body>
         <div class="container">
 
-            <?php include_once('header.php'); ?>
+            <?php include_once('../templates/header.php'); ?>
             <div class="alert alert-success" role="alert" style="margin-top:50px;">
                 <?php echo $_SESSION['LOGGED_USER']; ?> votre recette a bien été supprimée !
             </div>
             
 
-            <?php include_once('footer.php'); ?>
+            <?php include_once('../templates/footer.php'); ?>
         </div>
     </body>
 </html>

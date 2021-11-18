@@ -18,7 +18,7 @@
 
         <div class="d-flex flex-column min-vh-100">
             <div class="container">
-                <?php include_once('header.php'); ?>
+                <?php include_once('templates/header.php'); ?>
                 <h1 style="margin-top:50px;">Ajouter une nouvelle recette...</h1>
                 
                 <form action="recipes/postRecipes.php" method="POST">
@@ -34,7 +34,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </form>
-                <div style="margin-top: 25vh;" ><?php include_once('footer.php'); ?></div>
+                <div style="margin-top: 25vh;" ><?php include_once('templates/footer.php'); ?></div>
             </div>
         </div>
 

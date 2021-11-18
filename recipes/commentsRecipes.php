@@ -1,31 +1,22 @@
-<?php 
-
+<?php
 session_start();
+
 include_once('../config/mySQL.php');
 
-$postData = $_POST;
-
-if ( !isset($postData['newTitle']) || !isset($postData['newRecipe']) )
-{
-	echo('Il faut un titre et une recette pour soumettre le formulaire.');
-    return;
-}
+$comment = $_POST['comment'];
+$subject = $_POST['subjects'];
 
 
-$newTitle = $postData['newTitle'];
-$newRecipe = $postData['newRecipe'];
-
-//faire l'insertion en base de donnée
-$insertRecipe = $db->prepare('INSERT INTO recipes(title, recipe, author, is_enabled) VALUES (:title, :recipe, :author, :is_enabled)');
-$insertRecipe->execute([
-    'title' => $postData['newTitle'],
-    'recipe' => $postData['newRecipe'],
+$commentsStatement = $db->prepare('INSERT INTO comments(post_id, author, subjects, comment) VALUES (:post_id, :author, :subjects, :comment)');
+$commentsStatement->execute([
+    'post_id' => $_POST['id'],
     'author' => $_SESSION['LOGGED_USER'],
-    'is_enabled' => 1,
+    'subjects' => $_POST['subjects'],
+    'comment' => $_POST['comment'],
 ])
 
-?>
 
+?>
 
 <!DOCTYPE html>
 <html>
@@ -33,7 +24,7 @@ $insertRecipe->execute([
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Site de Recettes - Page d'accueil</title>
+        <title>Nos plaisirs gourmets ! | Commentaire</title>
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
             rel="stylesheet"
@@ -44,14 +35,14 @@ $insertRecipe->execute([
 
             <?php include_once('../templates/header.php'); ?>
             <div class="alert alert-success" role="alert">
-                <?php echo $_SESSION['LOGGED_USER']; ?> votre recette a bien été publiée !
+                <?php echo $_SESSION['LOGGED_USER']; ?> votre commentaire a bien été publié !
             </div>
             
             <div class="card" style="margin-bottom:100px;">
                 <div class="card-body" >
                     <h5 class="card-title" style="margin-bottom:30px;" >Rappel de vos informations</h5>
-                    <p class="card-text"><b>Titre</b> : <?php echo($newTitle); ?></p>
-                    <p class="card-text"><b>Recette</b> : <?php echo strip_tags($newRecipe); ?></p>
+                    <p class="card-text"><b>Sujet</b> : <?php echo ($subject); ?></p>
+                    <p class="card-text"><b>Commentaire</b> : <?php echo strip_tags($comment); ?></p>
                 </div>
             </div>
             <?php include_once('../templates/footer.php'); ?>

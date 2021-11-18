@@ -40,7 +40,7 @@ $recipe = $getRetriveStatement->fetch(PDO::FETCH_ASSOC);
 
         <div class="d-flex flex-column min-vh-100">
             <div class="container">
-                <?php include_once('header.php'); ?>
+                <?php include_once('templates/header.php'); ?>
                 <h1 style="margin-top:50px;">Supprimer la recette ⏩ <?php echo ($recipe['title']) ?></h1>
                 <form action="recipes/deleteRecipes.php" methode="GET">
                     <div class="mb-3 visually-hidden">
@@ -53,7 +53,7 @@ $recipe = $getRetriveStatement->fetch(PDO::FETCH_ASSOC);
                     </div>
                 </form>
                 
-                <div style="margin-top: 25vh;" ><?php include_once('footer.php'); ?></div>
+                <div style="margin-top: 25vh;" ><?php include_once('templates/footer.php'); ?></div>
             </div>
         </div>
 

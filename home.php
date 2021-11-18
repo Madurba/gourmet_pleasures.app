@@ -15,8 +15,7 @@
 
     <body class="d-flex flex-column min-vh-100">
         <div class="container" >
-
-            <?php include_once('header.php'); ?>
+            <?php include_once('templates/header.php'); ?>
             <h1 class="text-center" style="margin:50px;">Nos plaisirs gourmets !</h1>
 
             <!-- inclusion des variables et fonctions -->
@@ -27,7 +26,7 @@
             ?>
 
             <!-- inclusion de l'entête du site -->
-            <?php include_once('header.php'); ?>
+            <?php include_once('templates/header.php'); ?>
 
             <?php  include_once('login.php'); ?>
 
@@ -40,13 +39,7 @@
                         <h3 class="card-title" ><?php echo $recipe['title']; ?></h3>
                         <i><?php echo displayAuthor($recipe['author'], $users); ?></i><br /><br />
                         <p class="card-text"><?php echo $recipe['recipe']; ?></p>
-                        <a href="#" class="btn btn-success">Lire la recette</a>
-                        <?php if(isset($_SESSION['LOGGED_USER']) && $recipe['author'] === $_SESSION['LOGGED_USER']): ;?>
-                        <ul class="list-group list-group-horizontal" style="margin-top:20px;" >
-                            <li class="list-group-item"><a class="link-warning" href="front_updateRecipe.php?id=<?php echo($recipe['recipe_id']); ?>">Editer l'article</a></li>
-                            <li class="list-group-item"><a class="link-danger" href="front_deleteRecipe.php?id=<?php echo($recipe['recipe_id']); ?>">Supprimer l'article</a></li>
-                        </ul>
-                        <?php endif ;?>
+                        <a href="recipes/recipe-view.php?recipe_id=<?php echo($recipe['recipe_id']); ?>" class="btn btn-success" style="margin-top:50px;">Lire la recette</a>
                     </div>
                 </div>
             <?php endforeach ;?>
@@ -54,6 +47,6 @@
 
         
         <!-- inclusion du bas de page du site -->
-        <?php include_once('footer.php'); ?>
+        <?php include_once('templates/footer.php'); ?>
     </body>
 </html>

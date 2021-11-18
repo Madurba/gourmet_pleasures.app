@@ -6,11 +6,12 @@ include_once('config/mySQL.php');
 
 $getData = $_GET;
 
+//test si varibles existent et non nulles
 if ( !isset($getData['id']) && is_numeric($getData['id']) )
-{
-    echo ('Il faut un identifiant de recette pour la modifier.');
-    return;
-}
+    {
+        echo ('Il faut un identifiant de recette pour la modifier.');
+        return;
+    }
 
 //affichage du contenu de la bdd
 $getRetriveStatement = $db->prepare('SELECT * FROM recipes WHERE recipe_id = :id');
@@ -36,17 +37,17 @@ $recipe = $getRetriveStatement->fetch(PDO::FETCH_ASSOC);
     </head>
 
     <body>
-    <?php if(isset($_SESSION['LOGGED_USER'])): ?>
+    <?php if( isset($_SESSION['LOGGED_USER']) ): ?>
 
         <div class="d-flex flex-column min-vh-100">
             <div class="container">
-                <?php include_once('header.php'); ?>
-                <h1 style="margin-top:50px;">Modifier la recette ⏩ <?php echo ($recipe['title']) ?></h1>
+                <?php include_once('templates/header.php') ?>
+                <h1 style="margin-top:50px;">Modifier la recette ⏩ <?php echo htmlspecialchars($recipe['title']) ?></h1>
                 
                 <form action="recipes/updateRecipes.php" method="POST">
                     <div class="mb-3 visually-hidden">
                         <label for="id" class="form-label">Identifiant de la recette</label>
-                        <input type="hidden" class="form-control" id="id" name="id" value="<?php echo ($getData['id']);?>">
+                        <input type="hidden" class="form-control" id="id" name="id" value="<?php echo htmlspecialchars($getData['id']);?>">
                     </div>
 
                     <div class="mb-3">
@@ -61,7 +62,7 @@ $recipe = $getRetriveStatement->fetch(PDO::FETCH_ASSOC);
                     </div>
                     <button type="submit" class="btn btn-primary">Modifier</button>
                 </form>
-                <div style="margin-top: 25vh;" ><?php include_once('footer.php'); ?></div>
+                <div style="margin-top: 25vh;" ><?php include_once('templates/footer.php'); ?></div>
             </div>
         </div>
 
